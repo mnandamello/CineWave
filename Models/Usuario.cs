@@ -23,6 +23,5 @@ namespace CineWave.Models
 
         public ICollection<Campanha>? Campanhas { get; set; }
 
-        public ICollection<Insights>? Insights { get; set; }
     }
 }

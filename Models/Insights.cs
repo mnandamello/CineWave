@@ -9,11 +9,6 @@ namespace CineWave.Models
         [Key]
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public Usuario? Usuario { get; set; }
-
         [Required]
         [Column("Titulo_Filme")]
         public string MovieTitle { get; set; }
