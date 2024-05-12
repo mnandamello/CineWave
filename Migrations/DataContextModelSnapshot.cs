@@ -92,12 +92,7 @@ namespace CineWave.Migrations
                         .HasColumnType("NUMBER(10)")
                         .HasColumnName("Previsao_De_Roi");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("T_CNWV_INSIGHTS");
                 });
@@ -109,6 +104,10 @@ namespace CineWave.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("BOOLEAN")
+                        .HasColumnName("Usuario_Ativo");
 
                     b.Property<string>("PassWordHash")
                         .IsRequired()
@@ -141,22 +140,9 @@ namespace CineWave.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("CineWave.Models.Insights", b =>
-                {
-                    b.HasOne("CineWave.Models.Usuario", "Usuario")
-                        .WithMany("Insights")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("CineWave.Models.Usuario", b =>
                 {
                     b.Navigation("Campanhas");
-
-                    b.Navigation("Insights");
                 });
 #pragma warning restore 612, 618
         }

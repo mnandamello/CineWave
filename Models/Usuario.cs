@@ -23,5 +23,9 @@ namespace CineWave.Models
 
         public ICollection<Campanha>? Campanhas { get; set; }
 
+        [Required]
+        [Column("Usuario_Ativo")]
+        public bool IsActive { get; set; } = true;
+
     }
 }
