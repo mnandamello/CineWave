@@ -1,5 +1,6 @@
 ﻿using CineWave.Data;
 using CineWave.DTOs;
+using CineWave.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineWave.Controllers
@@ -14,11 +15,14 @@ namespace CineWave.Controllers
             _dataContext = dataContext;
         }
 
-
+        //TODO: Confirmar se esta certo
         public IActionResult PerfilPage(int id)
         {
             var getUser = _dataContext.Usuarios.Find(id);
             ViewBag.Usuario = getUser;
+
+            var numeroDeCampanhas = _dataContext.Campanhas.Count(c => c.UserId == id);
+            ViewBag.NumeroDeCampanhas = numeroDeCampanhas;
             return View();
         }
 

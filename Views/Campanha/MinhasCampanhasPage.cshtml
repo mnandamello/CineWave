@@ -2,5 +2,42 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Title = "Campanhas do Usuário";
+    var usuario = ViewBag.Usuario as CineWave.Models.Usuario;
+    var campanhas = ViewBag.Campanhas as IEnumerable<CineWave.Models.Campanha>;
 }
-<h1>Minhas Campanhas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Título do Filme</th>
+            <th>Gênero</th>
+            <th>Faixa Etária</th>
+            <th>Budget</th>
+            <th>Expectativa de Alcance</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+        }
+        @foreach (var campanha in campanhas)
+        {
+            <tr>
+                <td>@counter</td>
+                <td>@campanha.MovieTitle</td>
+                <td>@campanha.GenderMovie</td>
+                <td>@campanha.AgeRange</td>
+                <td>@campanha.Budget</td>
+                <td>@campanha.ReachExpectations</td>
+                <td>
+                    <a href="@Url.Action("EditarCampanha", "Campanha", new { id = campanha.Id })" class="btn btn-primary">Editar</a>
+                    <a href="@Url.Action("DeletarCampanha", "Campanha", new { id = campanha.Id })" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja apagar esta campanha?');">Apagar</a>
+                </td>
+            </tr>
+            counter++;
+        }
+    </tbody>
+</table>

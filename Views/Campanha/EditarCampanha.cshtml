@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CineWave.Models.Campanha;
+
+@{
+}
+
+<h2>Editar Campanha</h2>
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="EditarCampanha" asp-route-id="@Model.Id" method="post">
+    <div class="form-group">
+        <label asp-for="MovieTitle" class="control-label"></label>
+        <input asp-for="MovieTitle" class="form-control" />
+        <span asp-validation-for="MovieTitle" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GenderMovie" class="control-label"></label>
+        <input asp-for="GenderMovie" class="form-control" />
+        <span asp-validation-for="GenderMovie" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AgeRange" class="control-label"></label>
+        <input asp-for="AgeRange" class="form-control" />
+        <span asp-validation-for="AgeRange" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Budget" class="control-label"></label>
+        <input asp-for="Budget" class="form-control" />
+        <span asp-validation-for="Budget" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReachExpectations" class="control-label"></label>
+        <input asp-for="ReachExpectations" class="form-control" />
+        <span asp-validation-for="ReachExpectations" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

@@ -2,5 +2,25 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var previsoes = ViewBag.Previsoes as IEnumerable<CineWave.Models.Insights>;
 }
-<h1>Previsões</h1>
+
+<div class="container mt-5">
+    <h2>Previsões de ROI</h2>
+    <div class="row">
+        @foreach (var previsao in previsoes)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@previsao.MovieTitle</h5>
+                        <p class="card-text"><strong>Previsão de ROI:</strong> @previsao.RoiForecast</p>
+                        <p class="card-text"><strong>Canal de Marketing:</strong> @previsao.MarketingChannel</p>
+                        <p class="card-text"><strong>Custo Médio por Click:</strong> @previsao.AverageCostPerClick</p>
+                        <p class="card-text"><strong>Previsão de Conversão:</strong> @previsao.ConversionPrediction</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
