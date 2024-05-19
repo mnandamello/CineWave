@@ -44,14 +44,27 @@ namespace CineWave.Controllers
             return RedirectToAction("PerfilPage");
         }
 
-        public IActionResult DeletarPerfil(int id)
+        [HttpPost]
+        [Route("Usuario/DeletarPerfil")]
+        public IActionResult DeletarPerfil()
         {
-            var getUser = _dataContext.Usuarios.Find(id);
-            getUser.IsActive = false;
+            var id = HttpContext.Session.GetInt32("_Id");
+            if (id == null)
+            {
+                return RedirectToAction("LoginPage", "Auth");
+            }
 
-            _dataContext.Update(getUser);
-            _dataContext.SaveChanges();
-            return RedirectToAction("PerfilPage");
+            var getUser = _dataContext.Usuarios.Find(id);
+            if (getUser != null)
+            {
+                getUser.IsActive = false;
+                _dataContext.Update(getUser);
+                _dataContext.SaveChanges();
+                HttpContext.Session.Clear();
+            }
+
+            // Redireciona para a página de login
+            return RedirectToAction("LoginPage", "Auth");
         }
     }
 }

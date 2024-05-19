@@ -6,7 +6,6 @@ namespace CineWave.Models
     [Table("T_CNWV_INSIGHTS")]
     public class Insights
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]

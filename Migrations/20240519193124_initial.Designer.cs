@@ -11,7 +11,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace CineWave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240515000224_initial")]
+    [Migration("20240519193124_initial")]
     partial class initial
     {
         /// <inheritdoc />

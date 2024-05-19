@@ -24,7 +24,7 @@ namespace CineWave.Controllers
         public IActionResult LogarUsuario(LoginDTO request) 
         {
 
-            var session = HttpContext.Session.GetString("_Id");
+            var session = HttpContext.Session.GetInt32("_Id");
             var find = _dataContext.Usuarios.Find(session);
             if (find != null)
             {

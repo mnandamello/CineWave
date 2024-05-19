@@ -16,10 +16,11 @@ namespace CineWave.Controllers
             _dataContext = dataContext;
         }
 
-        public IActionResult MinhasCampanhasPage(int UserId)
+        public IActionResult MinhasCampanhasPage()
         {
+            var id = HttpContext.Session.GetInt32("_Id");
 
-            var getCampanhas = _dataContext.Campanhas.Where(c => c.UserId == UserId).ToList();
+            var getCampanhas = _dataContext.Campanhas.Where(c => c.UserId == id).ToList();
             
             ViewBag.Campanhas = getCampanhas;
             return View();
@@ -27,11 +28,9 @@ namespace CineWave.Controllers
 
         public IActionResult PrevisoesPage()
         {
-            var previsoes = _dataContext.Insights.ToList();
+            var getPrevisoes = _dataContext.Insights.ToList();
 
-            ViewBag.Previsoes = previsoes;
-
-            return View();
+            return View(getPrevisoes);
         }
 
         public IActionResult CadastrarCampanhaPage()
@@ -40,9 +39,16 @@ namespace CineWave.Controllers
         }
 
         //TODO: Como vou relacionar a campanha com meu usuario na hora de cadastrar?
-        public IActionResult CadastrarCampanha(int id, CadastroCampanhaDTO request)
+        public IActionResult CadastrarCampanha(CadastroCampanhaDTO request)
         {
+            var id = HttpContext.Session.GetInt32("_Id");
 
+            var getUser = _dataContext.Usuarios.Find(id);
+
+            if (getUser == null)
+            {
+                return NotFound("Usuário não encontrado.");
+            }
             Campanha newCampanha = new Campanha
             {
                 MovieTitle = request.MovieTitle,
@@ -50,13 +56,13 @@ namespace CineWave.Controllers
                 Budget = request.Budget,
                 AgeRange = request.AgeRange,
                 ReachExpectations = request.ReachExpectations,
-                UserId = id
+                UserId = getUser.Id
             };
 
             _dataContext.Campanhas.Add(newCampanha);
             _dataContext.SaveChanges();
 
-            return RedirectToAction("CadastrarCampanha");
+            return RedirectToAction("MinhasCampanhasPage");
         }
 
         //TODO: Está certa a função, como q ele está deletando? 

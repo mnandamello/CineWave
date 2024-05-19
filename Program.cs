@@ -14,7 +14,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = "CineWave-Sessions";
-    options.IdleTimeout = TimeSpan.FromSeconds(3);
+    options.IdleTimeout = TimeSpan.FromMinutes(3);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
