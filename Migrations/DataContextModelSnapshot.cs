@@ -106,7 +106,7 @@ namespace CineWave.Migrations
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("Usuario_Ativo");
 
                     b.Property<string>("PassWordHash")

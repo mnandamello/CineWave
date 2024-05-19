@@ -11,8 +11,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace CineWave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240511170932_second-migration")]
-    partial class secondmigration
+    [Migration("20240515000224_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,10 @@ namespace CineWave.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("NUMBER(1)")
+                        .HasColumnName("Usuario_Ativo");
 
                     b.Property<string>("PassWordHash")
                         .IsRequired()

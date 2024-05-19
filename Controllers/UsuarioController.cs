@@ -16,8 +16,10 @@ namespace CineWave.Controllers
         }
 
         //TODO: Confirmar se esta certo
-        public IActionResult PerfilPage(int id)
+        public IActionResult PerfilPage()
         {
+            var id = HttpContext.Session.GetInt32("_Id");
+
             var getUser = _dataContext.Usuarios.Find(id);
             ViewBag.Usuario = getUser;
 

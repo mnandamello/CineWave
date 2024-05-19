@@ -39,18 +39,45 @@ namespace CineWave.Controllers
             return View();
         }
 
+        //TODO: Como vou relacionar a campanha com meu usuario na hora de cadastrar?
+        public IActionResult CadastrarCampanha(int id, CadastroCampanhaDTO request)
+        {
 
-        //TODO: Está certa a função? 
+            Campanha newCampanha = new Campanha
+            {
+                MovieTitle = request.MovieTitle,
+                GenderMovie = request.GenderMovie,
+                Budget = request.Budget,
+                AgeRange = request.AgeRange,
+                ReachExpectations = request.ReachExpectations,
+                UserId = id
+            };
+
+            _dataContext.Campanhas.Add(newCampanha);
+            _dataContext.SaveChanges();
+
+            return RedirectToAction("CadastrarCampanha");
+        }
+
+        //TODO: Está certa a função, como q ele está deletando? 
         public IActionResult DeletarCampanha(int id)
         {
             var getCampanha = _dataContext.Campanhas.Find(id);
 
-            _dataContext.Update(getCampanha);
+            _dataContext.Campanhas.Remove(getCampanha);
             _dataContext.SaveChanges();
 
             return RedirectToAction("MinhasCampanhasPage");
         }
 
+        public IActionResult EditarCampanhaPage(int id)
+        {
+            var getCampanha = _dataContext.Campanhas.Find(id);
+            ViewBag.Campanhas = getCampanha;
+            return View();
+        }
+
+        //eu preciso retornar a minha view EditarCampanha e no form chamo essa minha função?
         public IActionResult EditarCampanha (int id, CadastroCampanhaDTO request)
         {
             var getCampanha = _dataContext.Campanhas.Find(id);
@@ -66,26 +93,6 @@ namespace CineWave.Controllers
 
             return RedirectToAction("MinhasCampanhasPage");
         }
-
-        //TODO: Como vou relacionar a campanha com meu usuario na hora de cadastrar?
-        public IActionResult CadastrarCampanha(CadastroCampanhaDTO request)
-        {
-
-            Campanha newCampanha = new Campanha
-            {
-                MovieTitle = request.MovieTitle,
-                GenderMovie = request.GenderMovie,
-                Budget = request.Budget,
-                AgeRange = request.AgeRange,
-                ReachExpectations = request.ReachExpectations
-            };
-
-            _dataContext.Campanhas.Add(newCampanha);
-            _dataContext.SaveChanges();
-
-            return RedirectToAction("CadastrarCampanha");
-        }
-
 
     }
 }

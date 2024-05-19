@@ -10,9 +10,10 @@
     <h2>Perfil do Usuário</h2>
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">@usuario.UserName</h5>
+            <h5 class="card-title"><strong>Nome do Usuário:</strong>@usuario.UserName</h5>
             <p class="card-text"><strong>Email:</strong> @usuario.UserEmail</p>
             <p class="card-text"><strong>Número de Campanhas:</strong> @numeroDeCampanhas</p>
+            <button asp-action="DeletarPerfil" asp-controller="Usuario" >Desativar</button> 
         </div>
     </div>
 </div>

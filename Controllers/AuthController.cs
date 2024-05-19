@@ -23,12 +23,20 @@ namespace CineWave.Controllers
 
         public IActionResult LogarUsuario(LoginDTO request) 
         {
-            var getUser = _dataContext.Usuarios.FirstOrDefault(x => x.UserEmail == request.Email);
+
+            var session = HttpContext.Session.GetString("_Id");
+            var find = _dataContext.Usuarios.Find(session);
+            if (find != null)
+            {
+                return RedirectToAction("PerfilPage", "Usuario");
+            }
+
+            var getUser = _dataContext.Usuarios.FirstOrDefault(x => x.UserEmail == request.UserEmail);
             if (getUser == null)
             {
                 return NotFound();
             }
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, getUser.PassWordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.PassWordHash, getUser.PassWordHash))
             {
                 return NotFound();
             }
@@ -37,7 +45,10 @@ namespace CineWave.Controllers
                 getUser.IsActive = true;
             }
 
-            return RedirectToAction("Home", "Index");
+            HttpContext.Session.SetInt32("_Id", getUser.Id);
+            HttpContext.Session.SetString("_email", getUser.UserEmail);
+
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -50,7 +61,7 @@ namespace CineWave.Controllers
         public IActionResult CadastroUsuario(CadastroDTO request) 
         {
             var findUser = _dataContext.Usuarios.FirstOrDefault(x => x.UserEmail == request.UserEmail);
-            if (findUser == null) 
+            if (findUser != null) 
             {
                 return NotFound(request);
             }
@@ -65,7 +76,7 @@ namespace CineWave.Controllers
             _dataContext.Usuarios.Add(newUser);
             _dataContext.SaveChanges();
 
-            return RedirectToAction("Auth", "LoginPage");
+            return RedirectToAction("LoginPage");
         }
     }
 }
