@@ -26,9 +26,10 @@ namespace CineWave.Controllers
             return View();
         }
 
+        // Aqui foi o método que não conseguimos resolver o problema, nn conseguimos pegar as infos do banco :(
         public IActionResult PrevisoesPage()
         {
-            var getPrevisoes = _dataContext.Insights.ToList();
+            var getPrevisoes = _dataContext.Insights.Find(2);
 
             return View(getPrevisoes);
         }
@@ -38,7 +39,6 @@ namespace CineWave.Controllers
             return View();
         }
 
-        //TODO: Como vou relacionar a campanha com meu usuario na hora de cadastrar?
         public IActionResult CadastrarCampanha(CadastroCampanhaDTO request)
         {
             var id = HttpContext.Session.GetInt32("_Id");

@@ -23,11 +23,12 @@ namespace CineWave.Controllers
             var getUser = _dataContext.Usuarios.Find(id);
             ViewBag.Usuario = getUser;
 
-            var numeroDeCampanhas = _dataContext.Campanhas.Count(c => c.UserId == id);
+            var numeroDeCampanhas = _dataContext.Campanhas.Count(c => c.UserId == id);//usei o count() pq pego o numero de elementos
             ViewBag.NumeroDeCampanhas = numeroDeCampanhas;
             return View();
         }
 
+        //nn implementado no front nessa sprint, em avaliação para ver se faz sentido ter
         public IActionResult EditarPerfil(int id, string newPassword, CadastroDTO request) 
         {
             var getUser = _dataContext.Usuarios.Find(id);
@@ -44,9 +45,10 @@ namespace CineWave.Controllers
             return RedirectToAction("PerfilPage");
         }
 
+        //foi colocado a rota pois o sistema estava se perdendo
         [HttpPost]
         [Route("Usuario/DeletarPerfil")]
-        public IActionResult DeletarPerfil()
+        public IActionResult DesativarPerfil()
         {
             var id = HttpContext.Session.GetInt32("_Id");
             if (id == null)
@@ -63,7 +65,6 @@ namespace CineWave.Controllers
                 HttpContext.Session.Clear();
             }
 
-            // Redireciona para a página de login
             return RedirectToAction("LoginPage", "Auth");
         }
     }
