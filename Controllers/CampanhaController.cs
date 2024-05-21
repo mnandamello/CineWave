@@ -8,6 +8,8 @@ namespace CineWave.Controllers
     public class CampanhaController : Controller
 
     {
+        //Descrição do core: Aqui é o CORE  da nossa aplicação é essa parte que futuramente vai permitir o usuário cadastrar uma campanha de um filme e
+        //vai enviar para a IA e ver os insights das campanhas que a IA vai retoranr, ou seja vai ser a parte principal da nossa aplicação.
 
         private readonly DataContext _dataContext;
 
