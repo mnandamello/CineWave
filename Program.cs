@@ -10,6 +10,7 @@ builder.Services.AddDbContext<DataContext>(o =>
     o.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"));
 });
 
+//mexendo com sessão
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {

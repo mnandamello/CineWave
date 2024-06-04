@@ -14,8 +14,6 @@ namespace CineWave.Controllers
             _dataContext = dataContext;
         }
 
-
-
         public IActionResult LoginPage()
         {
             return View();

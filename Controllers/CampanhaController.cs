@@ -67,7 +67,6 @@ namespace CineWave.Controllers
             return RedirectToAction("MinhasCampanhasPage");
         }
 
-        //TODO: Está certa a função, como q ele está deletando? 
         public IActionResult DeletarCampanha(int id)
         {
             var getCampanha = _dataContext.Campanhas.Find(id);
@@ -78,6 +77,7 @@ namespace CineWave.Controllers
             return RedirectToAction("MinhasCampanhasPage");
         }
 
+        //Aqui eu chamo a view e passo de dados de determinada campanha
         public IActionResult EditarCampanhaPage(int id)
         {
             var getCampanha = _dataContext.Campanhas.Find(id);
@@ -85,7 +85,7 @@ namespace CineWave.Controllers
             return View();
         }
 
-        //eu preciso retornar a minha view EditarCampanha e no form chamo essa minha função?
+        //eu preciso retornar a minha view EditarCampanha e no form chamo essa minha função
         public IActionResult EditarCampanha (int id, CadastroCampanhaDTO request)
         {
             var getCampanha = _dataContext.Campanhas.Find(id);
