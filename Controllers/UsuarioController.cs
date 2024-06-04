@@ -47,7 +47,7 @@ namespace CineWave.Controllers
 
         //foi colocado a rota pois o sistema estava se perdendo
         [HttpPost]
-        [Route("Usuario/DeletarPerfil")]
+        [Route("Usuario/DesativarPerfil")]
         public IActionResult DesativarPerfil()
         {
             var id = HttpContext.Session.GetInt32("_Id");

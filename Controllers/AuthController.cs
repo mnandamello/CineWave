@@ -66,7 +66,7 @@ namespace CineWave.Controllers
 
             Usuario newUser = new Usuario
             {
-                UserEmail = request.UserEmail,
+                UserEmail    = request.UserEmail,
                 UserName = request.UserName,
                 PassWordHash = BCrypt.Net.BCrypt.HashPassword(request.PassWordHash),
             };
